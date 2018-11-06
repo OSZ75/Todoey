@@ -10,7 +10,7 @@ import UIKit
 
 class TodoListViewController: UITableViewController {
 
-    let itemArray = ["買雞蛋", "買牛奶", "買泡麵"]
+    var itemArray = ["買雞蛋", "買牛奶", "買泡麵"]
     
     
     override func viewDidLoad() {
@@ -62,6 +62,37 @@ class TodoListViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         
     }
+    
+    //Mark-增加新Item
+    
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "增加新項目", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "加入項目", style: .default) { (action) in
+            
+            self.itemArray.append(textField.text!)
+            
+            self.tableView.reloadData()
+            
+        }
+        
+        alert.addTextField { (alertTextField) in
+            
+            alertTextField.placeholder = "輸入新項目"
+            textField = alertTextField
+            
+        }
+        
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
+        
+    }
+    
+    
 
 }
 
